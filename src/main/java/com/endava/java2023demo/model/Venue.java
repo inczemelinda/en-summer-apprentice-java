@@ -5,18 +5,18 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Venue")
 public class Venue {
+    @Column(name = "venueID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer venueID;
-    @Column
+    private Integer id;
+    @Column(name = "location")
     private String location;
-    @Column
+    @Column(name = "type")
     private String type;
-    @Column
+    @Column(name = "capacity")
     private int capacity;
 
     public Venue() {
-        // Default constructor
     }
 
     public Venue(String location, String type, int capacity) {
@@ -26,7 +26,7 @@ public class Venue {
     }
 
     public void setVenueID(Integer venueID) {
-        this.venueID = venueID;
+        this.id = venueID;
     }
 
     public void setLocation(String location) {
@@ -42,7 +42,7 @@ public class Venue {
     }
 
     public Integer getVenueID() {
-        return venueID;
+        return id;
     }
 
     public String getLocation() {
@@ -59,7 +59,7 @@ public class Venue {
 
     @Override
     public String toString() {
-        return "Venue{" + "venueID=" + venueID +
+        return "Venue{" + "venueID=" + id +
                 ", location=" + location + ", type='" + type +
                 ", capacity" + capacity + '}';
     }

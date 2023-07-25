@@ -1,27 +1,28 @@
 package com.endava.java2023demo.controller;
 
-import com.endava.java2023demo.model.Orders;
+import com.endava.java2023demo.DTO.OrdersDTO;
+import com.endava.java2023demo.DTO.orderRequest;
 import com.endava.java2023demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
 public class OrderController {
+    Integer customerId = 1;
     @Autowired
     private OrderService orderService;
-
-    // Endpoint for GET /orders (customerId is hardcoded in the backend)
-    @GetMapping
-    public Iterable<Orders> getAllOrders() {
-        return orderService.getAllOrders();
+    @GetMapping("/api/orders")
+    public List<OrdersDTO> getOrders() {
+        List<OrdersDTO> orders = orderService.getOrdersById(customerId);
+        return orders;
     }
-    // Endpoint for POST /orders (customerId is hardcoded in the backend)
-    @PostMapping
-    public ResponseEntity<Orders> createOrder(@RequestBody OrderRequest orderRequest) {
-        Orders order = orderService.createOrder(orderRequest.getEventID(),
-                orderRequest.getTicketCategoryID(), orderRequest.getNumberOfTickets());
-        return ResponseEntity.ok(order);
+
+    @PostMapping("/api/Orders")
+    public ResponseEntity<OrdersDTO> createOrder(@RequestBody orderRequest orderRequest) {
+        OrdersDTO orderDTO = orderService.createOrder(customerId, orderRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderDTO);
     }
 }

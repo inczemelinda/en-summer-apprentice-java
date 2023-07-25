@@ -1,44 +1,47 @@
 package com.endava.java2023demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Event")
 public class Event {
+    @Column(name = "eventID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer eventID;
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "venueID")
     private Venue venue;
     @ManyToOne
     @JoinColumn(name = "eventTypeID")
     private EventType eventType;
-    @Column
-    private String eventDescription;
-    @Column
-    private String eventName;
-    @Column
-    private String startDate;
-    @Column
-    private String endDate;
+    @Column(name = "eventDescription")
+    private String description;
+    @Column(name = "eventName")
+    private String name;
+    @Column(name = "startDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime startDate;
+    @Column(name = "endDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime endDate;
 
     public Event() {
-        // Default constructor
     }
 
     public Event(Venue venue, EventType eventType, String eventDescription,
-                 String eventName, String startDate, String endDate) {
+                 String eventName, LocalDateTime startDate, LocalDateTime endDate) {
         this.venue = venue;
         this.eventType = eventType;
-        this.eventDescription = eventDescription;
-        this.eventName = eventName;
+        this.description = eventDescription;
+        this.name = eventName;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
     public void setEventID(Integer eventID) {
-        this.eventID = eventID;
+        this.id = eventID;
     }
 
     public void setVenue(Venue venue) {
@@ -50,23 +53,23 @@ public class Event {
     }
 
     public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
+        this.description = eventDescription;
     }
 
     public void setEventName(String eventName) {
-        this.eventName = eventName;
+        this.name = eventName;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
     public Integer getEventID() {
-        return eventID;
+        return id;
     }
 
     public Venue getVenue() {
@@ -78,26 +81,26 @@ public class Event {
     }
 
     public String getEventDescription() {
-        return eventDescription;
+        return description;
     }
 
     public String getEventName() {
-        return eventName;
+        return name;
     }
 
-    public String getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public String getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
     @Override
     public String toString() {
-        return "Event{" + "eventID=" + eventID +
+        return "Event{" + "eventID=" + id +
                 ", venueID=" + venue + ", eventTypeID='" + eventType +
-                ", eventDescription" + eventDescription +
-                ", eventName" + eventName + ", startDate" + startDate + ", endDate" + endDate + '}';
+                ", eventDescription" + description +
+                ", eventName" + name + ", startDate" + startDate + ", endDate" + endDate + '}';
     }
 }

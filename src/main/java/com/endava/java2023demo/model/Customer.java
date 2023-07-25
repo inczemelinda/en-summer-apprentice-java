@@ -5,16 +5,16 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Customer")
 public class Customer {
+    @Column(name = "customerID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer customerID;
-    @Column
+    private Integer id;
+    @Column(name = "customerName")
     private String customerName;
-    @Column
+    @Column(name = "email")
     private String email;
 
     public Customer() {
-        // Default constructor
     }
 
     public Customer(String customerName, String email) {
@@ -22,8 +22,8 @@ public class Customer {
         this.email = email;
     }
 
-    public void setCustomerID(Integer customerID) {
-        this.customerID = customerID;
+    public void setCustomerId(Integer id) {
+        this.id = id;
     }
 
     public void setCustomerName(String customerName) {
@@ -34,8 +34,8 @@ public class Customer {
         this.email = email;
     }
 
-    public Integer getCustomerID() {
-        return customerID;
+    public Integer getCustomerId() {
+        return id;
     }
 
     public String getCustomerName() {
@@ -48,7 +48,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerID=" + customerID +
+        return "Customer{" + "customerID=" + id +
                 ", customerName=" + customerName + ", email='" + email + '}';
     }
 }

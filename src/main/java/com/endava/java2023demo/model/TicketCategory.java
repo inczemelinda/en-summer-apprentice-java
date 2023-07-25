@@ -5,19 +5,19 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "TicketCategory")
 public class TicketCategory {
+    @Column(name = "ticketCategoryID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ticketCategoryID;
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "eventID")
     private Event event;
-    @Column
+    @Column(name = "description")
     private String description;
-    @Column
+    @Column(name = "price", columnDefinition = "NUMERIC(10,2)")
     private double price;
 
     public TicketCategory() {
-        // Default constructor
     }
 
     public TicketCategory(Event event, String description, double price) {
@@ -26,8 +26,8 @@ public class TicketCategory {
         this.price = price;
     }
 
-    public void setTicketCategoryID(Integer ticketCategoryID) {
-        this.ticketCategoryID = ticketCategoryID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setEvent(Event event) {
@@ -42,8 +42,8 @@ public class TicketCategory {
         this.price = price;
     }
 
-    public Integer getTicketCategoryID() {
-        return ticketCategoryID;
+    public Integer getId() {
+        return id;
     }
 
     public Event getEvent() {
@@ -60,7 +60,7 @@ public class TicketCategory {
 
     @Override
     public String toString() {
-        return "TicketCategory{" + "ticketCategoryID=" + ticketCategoryID +
+        return "TicketCategory{" + "ticketCategoryID=" + id +
                 ", eventID=" + event + ", description='" + description +
                 ", price" + price + '}';
     }

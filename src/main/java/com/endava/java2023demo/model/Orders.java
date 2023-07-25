@@ -1,34 +1,34 @@
 package com.endava.java2023demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Orders")
 public class Orders {
+    @Column(name = "orderID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderID;
-
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "customerID")
     private Customer customer;
-
     @ManyToOne
     @JoinColumn(name = "ticketCategoryID")
     private TicketCategory ticketCategory;
-    @Column
-    private String orderedAt;
-    @Column
-    private int numberOfTickets;
-    @Column
+    @Column(name = "orderedAt")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime orderedAt;
+    @Column(name = "numberOfTickets")
+    private Integer numberOfTickets;
+    @Column(name = "totalPrice" , columnDefinition = "NUMERIC(10,2)")
     private double totalPrice;
 
     public Orders() {
-        // Default constructor
     }
 
-    public Orders(Customer customer, TicketCategory ticketCategory, String orderedAt,
-                  int numberOfTickets, double totalPrice) {
+    public Orders(Customer customer, TicketCategory ticketCategory, LocalDateTime orderedAt,
+                  Integer numberOfTickets, double totalPrice) {
         this.customer = customer;
         this.ticketCategory = ticketCategory;
         this.orderedAt = orderedAt;
@@ -36,8 +36,8 @@ public class Orders {
         this.totalPrice = totalPrice;
     }
 
-    public void setOrderID(Integer orderID) {
-        this.orderID = orderID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setCustomer(Customer customer) {
@@ -48,11 +48,11 @@ public class Orders {
         this.ticketCategory = ticketCategory;
     }
 
-    public void setOrderedAt(String orderedAt) {
+    public void setOrderedAt(LocalDateTime orderedAt) {
         this.orderedAt = orderedAt;
     }
 
-    public void setNumberOfTickets(int numberOfTickets) {
+    public void setNumberOfTickets(Integer numberOfTickets) {
         this.numberOfTickets = numberOfTickets;
     }
 
@@ -60,8 +60,8 @@ public class Orders {
         this.totalPrice = totalPrice;
     }
 
-    public Integer getOrderID() {
-        return orderID;
+    public Integer getId() {
+        return id;
     }
 
     public Customer getCustomer() {
@@ -72,11 +72,11 @@ public class Orders {
         return ticketCategory;
     }
 
-    public String getOrderedAt() {
+    public LocalDateTime getOrderedAt() {
         return orderedAt;
     }
 
-    public int getNumberOfTickets() {
+    public Integer getNumberOfTickets() {
         return numberOfTickets;
     }
 
@@ -86,8 +86,8 @@ public class Orders {
 
     @Override
     public String toString() {
-        return "Orders{" + "orderID=" + orderID +
+        return "Orders{" + "orderID=" + id +
                 ", customerID=" + customer + ", ticketCategoryID='" + ticketCategory +
-                ", ordoredAt" + orderedAt + ", numberOfTickets" + numberOfTickets + ", totalPrice" + totalPrice + '}';
+                ", orderedAt" + orderedAt + ", numberOfTickets" + numberOfTickets + ", totalPrice" + totalPrice + '}';
     }
 }

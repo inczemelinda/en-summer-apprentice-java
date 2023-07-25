@@ -5,39 +5,39 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "EventType")
 public class EventType {
+    @Column(name = "eventTypeID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer eventTypeID;
-    @Column
-    private String eventTypeName;
+    private Integer id;
+    @Column(name = "eventTypeName")
+    private String name;
 
     public EventType() {
-        // Default constructor
     }
 
     public EventType(String eventTypeName) {
-        this.eventTypeName = eventTypeName;
+        this.name = eventTypeName;
     }
 
     public void setEventTypeID(Integer eventTypeID) {
-        this.eventTypeID = eventTypeID;
+        this.id = eventTypeID;
     }
 
     public void setEventTypeName(String eventTypeName) {
-        this.eventTypeName = eventTypeName;
+        this.name = eventTypeName;
     }
 
     public Integer getEventTypeID() {
-        return eventTypeID;
+        return id;
     }
 
     public String getEventTypeName() {
-        return eventTypeName;
+        return name;
     }
 
     @Override
     public String toString() {
-        return "EventType{" + "eventTypeID=" + eventTypeID +
-                ", eventTypeName=" + eventTypeName + '}';
+        return "EventType{" + "eventTypeID=" + id +
+                ", eventTypeName=" + name + '}';
     }
 }
