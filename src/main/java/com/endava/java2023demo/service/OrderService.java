@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -48,11 +49,11 @@ public class OrderService {
         Integer numberOfTickets = orderRequest.getNumberOfTickets();
         LocalDateTime timeStamp = LocalDateTime.now();
 
-        List<TicketCategory> ticketsCategory = ticketCategoryRepository.findTicketCategoriesById(ticketCategoryId);
+        Optional<TicketCategory> ticketsCategory = ticketCategoryRepository.findById(ticketCategoryId);
         if (ticketsCategory.isEmpty()) {
             throw new IllegalArgumentException("Ticket category not found");
         }
-        TicketCategory ticketCategory = ticketsCategory.get(0);
+        TicketCategory ticketCategory = ticketsCategory.get();
 
         double totalPrice = ticketCategory.getPrice() * numberOfTickets;
 
